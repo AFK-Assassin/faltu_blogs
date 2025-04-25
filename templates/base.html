@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %} </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    
+    <!-- Custom Style -->
+    <style>
+      :root {
+        --primary-color: #2196f3;    /* Primary blue */
+        --secondary-color: #ffeb3b;  /* Yellow */
+        --light-yellow: #fff9c4;     /* Light yellow */
+        --text-color: #212121;       /* Text color */
+      }
+      
+      /* Background colors */
+      .bg-primary-custom {
+        background-color: var(--primary-color) !important;
+      }
+      .bg-secondary-custom {
+        background-color: var(--secondary-color) !important;
+      }
+      .bg-light-yellow {
+        background-color: var(--light-yellow) !important;
+      }
+
+      /* Text colors */
+      .text-primary-custom {
+        color: var(--primary-color) !important;
+      }
+      .text-dark-theme {
+        color: var(--text-color) !important;
+      }
+    </style> 
+  </head>
+  <body class= "bg-light-yellow" >
+    <nav class="navbar navbar-expand-lg bg-secondary-custom">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">Navbar</a>
+          <div class="navbar-nav">
+            {% if not 'user' in session %}
+            <a href="/login" class="nav-link">Login</a>
+            <a href="/register" class="nav-link">Register</a>
+            {% else %}
+             <a href="/create-blog" class="nav-link">Create Blog</a>
+            <a href="/logout" class="nav-link">Logout</a>
+            {% endif %}  
+          </div>
+        </div>
+    </nav>
+    <div class="container">
+      {% with messages = get_flashed_messages(with_categories=True) %}
+          {% if messages %}
+              {% for category, message in messages %}
+                  <div class="alert alert-{{ category }}">
+                      {{ message }}
+                  </div>
+              {% endfor %}
+          {% endif %}
+      {% endwith %}
+  </div>
+  
+    {% block content %}{% endblock %}
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+  </body>
+</html>
