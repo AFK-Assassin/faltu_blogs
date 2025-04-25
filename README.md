@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 This code snippet is the beginning of a Flask application that uses several essential libraries. Here's a breakdown of what each import does:
 
 Flask: This is the core class that you use to create a Flask application.
